@@ -124,6 +124,97 @@
         border-bottom: 1px solid rgba(251, 251, 251, 0.1);
       }
     }
+    /* ── Intro + What You Need to Know (section-specific styles) ── */
+    .intro-section {
+      background: var(--cream);
+      padding: 4rem 1.5rem;
+    }
+
+    .intro-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .intro-text {
+      color: var(--text);
+      font-size: 1.15rem;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+    }
+
+    .intro-text:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .what-to-know-section {
+      background: var(--cream);
+      padding: 0 1.5rem 4rem;
+    }
+
+    .dark-box {
+      background: var(--green-dark);
+      border-radius: 12px;
+      padding: 3rem 2.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .box-eyebrow {
+      color: var(--lime);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .box-title {
+      color: var(--cream);
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 2.5rem;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .bullet-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .bullet-arrow {
+      color: var(--lime);
+      font-size: 0.9rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .bullet-content {
+      color: var(--text-muted-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .bullet-content strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .intro-section { padding: 3rem 1.25rem; }
+      .what-to-know-section { padding: 0 1.25rem 3rem; }
+      .dark-box { padding: 2rem 1.5rem; }
+      .intro-text { font-size: 1.05rem; }
+    }
   </style>
 </head>
 <body>
@@ -167,6 +258,53 @@
       <a href="#questions">Questions</a>
     </nav>
   </div>
+
+  <!-- ════ INTRO ════ -->
+  <section class="intro-section">
+    <div class="intro-inner">
+      <p class="intro-text">
+        Eight years ago we took our first trip to Big Sur together. We've never shared it with anyone else — until now. If you love us, you probably love the outdoors. There is no better place to experience the beauty of California. Having you here means everything to us, so we promise we'll make it worth the trip.
+      </p>
+      <p class="intro-text">
+        Below is everything you need to start planning. The short version is at the top; all the detail follows.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════ WHAT YOU NEED TO KNOW ════ -->
+  <section class="what-to-know-section">
+    <div class="dark-box">
+      <p class="box-eyebrow">The short version</p>
+      <h2 class="box-title">What you need to know</h2>
+
+      <ul class="bullet-list">
+        <li class="bullet-item">
+          <span class="bullet-arrow">→</span>
+          <p class="bullet-content"><strong>Book lodging now.</strong> Big Sur is already mostly booked through summer 2026, and we're 14 months out. Don't wait.</p>
+        </li>
+        <li class="bullet-item">
+          <span class="bullet-arrow">→</span>
+          <p class="bullet-content"><strong>Our room block at Big Sur Lodge is open.</strong> Book directly through the link below — easiest option, puts you at the center of the weekend.</p>
+        </li>
+        <li class="bullet-item">
+          <span class="bullet-arrow">→</span>
+          <p class="bullet-content"><strong>Arrive Friday, plan through Monday.</strong> The wedding is Saturday, but we have a full long weekend planned and would love you there for as much of it as possible.</p>
+        </li>
+        <li class="bullet-item">
+          <span class="bullet-arrow">→</span>
+          <p class="bullet-content"><strong>Saturday is on us.</strong> Shuttles, dinner, and drinks on the wedding day are covered. Everything before and after is on you — but we'll make it worth it.</p>
+        </li>
+        <li class="bullet-item">
+          <span class="bullet-arrow">→</span>
+          <p class="bullet-content"><strong>No parking at the venue.</strong> Shuttles are provided. If you're not staying at Big Sur Lodge, arrival options will be more limited — details below.</p>
+        </li>
+        <li class="bullet-item">
+          <span class="bullet-arrow">→</span>
+          <p class="bullet-content"><strong>Questions?</strong> Just email us — we're happy to help with anything.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
 
   <!-- ════ OVERVIEW ════ -->
   <!-- sections/overview.html -->
