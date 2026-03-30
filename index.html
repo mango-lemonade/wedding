@@ -215,6 +215,169 @@
       .dark-box { padding: 2rem 1.5rem; }
       .intro-text { font-size: 1.05rem; }
     }
+
+    /* ── Weekend / Itinerary (section-specific styles) ── */
+    .section--itinerary {
+      background: var(--cream);
+      padding: var(--space-3xl) var(--space-lg);
+    }
+
+    .itinerary-inner {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .itinerary-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 0.5rem;
+    }
+
+    .itinerary-title {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--text);
+      margin-bottom: var(--space-lg);
+    }
+
+    .itinerary-intro {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .day-block {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .day-name {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .day-tag {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--lime);
+      background: var(--lime-pale);
+      border: 1px solid rgba(141, 179, 42, 0.25);
+      padding: 0.3em 0.75em;
+      border-radius: 100px;
+      white-space: nowrap;
+      position: relative;
+      top: -2px;
+    }
+
+    .day-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin-bottom: 0;
+    }
+
+    .event-list {
+      list-style: none;
+    }
+
+    .event-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: var(--space-sm) var(--space-lg);
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .event-row:last-child {
+      border-bottom: none;
+    }
+
+    .event-time {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-top: 0.2rem;
+      line-height: 1.4;
+    }
+
+    .event-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .event-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .event-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    .event-note {
+      font-size: 0.9rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .callout-bar {
+      background: var(--green-dark);
+      border-radius: 6px;
+      padding: var(--space-md) var(--space-lg);
+      margin-top: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .callout-bar-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--lime);
+    }
+
+    .callout-bar-text {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    @media (min-width: 768px) {
+      .section--itinerary { padding: var(--space-3xl) var(--space-2xl); }
+      .event-row { grid-template-columns: 130px 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .section--itinerary { padding: var(--space-3xl) var(--space-3xl); }
+      .event-row { grid-template-columns: 150px 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -310,7 +473,122 @@
   <!-- sections/overview.html -->
 
   <!-- ════ WEEKEND ════ -->
-  <!-- sections/weekend.html -->
+  <section id="weekend" class="section--itinerary">
+    <div class="itinerary-inner">
+
+      <p class="itinerary-eyebrow">May 28 – May 31, 2027</p>
+      <h2 class="itinerary-title">The Weekend</h2>
+      <p class="itinerary-intro">Plan to arrive Friday and stay through Monday morning. The wedding is Saturday, but we have a full long weekend planned — join whatever works for you.</p>
+
+      <!-- Friday -->
+      <div class="day-block">
+        <div class="day-header">
+          <h3 class="day-name">Friday, May 28</h3>
+          <span class="day-tag">Arrival</span>
+        </div>
+        <hr class="day-rule">
+        <ul class="event-list">
+          <li class="event-row">
+            <span class="event-time">Evening</span>
+            <div class="event-content">
+              <span class="event-title">Travel &amp; Settle In</span>
+              <p class="event-desc">Enjoy the drive up or down the coast — Carmel and Monterey are great stops along the way. Get in, settle in, and grab dinner on your own in Big Sur or en route.</p>
+            </div>
+          </li>
+          <li class="event-row">
+            <span class="event-time">5:00 – 8:00 pm</span>
+            <div class="event-content">
+              <span class="event-title">Family Welcome Dinner</span>
+              <p class="event-desc">Big Sur Lodge Redwood Patio. Hosted by our loving parents, Mark, Ann, Marc, and Felicia.</p>
+              <p class="event-note">Family only.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Saturday -->
+      <div class="day-block">
+        <div class="day-header">
+          <h3 class="day-name">Saturday, May 29</h3>
+          <span class="day-tag">Wedding Day</span>
+        </div>
+        <hr class="day-rule">
+        <ul class="event-list">
+          <li class="event-row">
+            <span class="event-time">Morning</span>
+            <div class="event-content">
+              <span class="event-title">Free Time</span>
+              <p class="event-desc">Get ready, take a walk, explore. Big Sur will do the rest.</p>
+            </div>
+          </li>
+          <li class="event-row">
+            <span class="event-time">3:00 pm</span>
+            <div class="event-content">
+              <span class="event-title">Ceremony &amp; Celebration</span>
+              <p class="event-desc">The wedding — ceremony, dinner, dancing, and beyond — runs 3:00 pm to 10:00 pm+.</p>
+              <p class="event-note">Shuttles to and from the venue are provided. Do not drive to the venue.</p>
+            </div>
+          </li>
+        </ul>
+        <div class="callout-bar">
+          <span class="callout-bar-label">All on us Saturday:</span>
+          <span class="callout-bar-text">shuttles, dinner, and drinks. Come ready to celebrate.</span>
+        </div>
+      </div>
+
+      <!-- Sunday -->
+      <div class="day-block">
+        <div class="day-header">
+          <h3 class="day-name">Sunday, May 30</h3>
+          <span class="day-tag">The Day After</span>
+        </div>
+        <hr class="day-rule">
+        <ul class="event-list">
+          <li class="event-row">
+            <span class="event-time">Morning</span>
+            <div class="event-content">
+              <span class="event-title">Coffee at the Village</span>
+              <p class="event-desc">Coffee and snacks at the Village, Big Sur.</p>
+            </div>
+          </li>
+          <li class="event-row">
+            <span class="event-time">Afternoon</span>
+            <div class="event-content">
+              <span class="event-title">Memorial Hike for Brian</span>
+              <p class="event-desc">An afternoon hike in Andrew Molera State Park in memory of Jenna's brother, Brian. Join us if you're able — it will mean a lot to us.</p>
+            </div>
+          </li>
+          <li class="event-row">
+            <span class="event-time">Evening</span>
+            <div class="event-content">
+              <span class="event-title">Dinner in Big Sur</span>
+              <p class="event-desc">Dine in groups at any of the phenomenal establishments in Big Sur. We have favorites from casual to fine dining and can share our recommendations.</p>
+              <p class="event-note">Sunset at Pfeiffer Beach, drinks at Fernwood Tavern.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Monday -->
+      <div class="day-block">
+        <div class="day-header">
+          <h3 class="day-name">Monday, May 31</h3>
+          <span class="day-tag">Send-Off</span>
+        </div>
+        <hr class="day-rule">
+        <ul class="event-list">
+          <li class="event-row">
+            <span class="event-time">Morning</span>
+            <div class="event-content">
+              <span class="event-title">Farewell Breakfast at Café Kevah</span>
+              <p class="event-desc">Coffee and breakfast overlooking the coast at Café Kevah at Nepenthe — a spot Jenna's parents have been going to since the 80s. A perfect last view before everyone heads out.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ════ LODGING ════ -->
   <!-- sections/lodging.html -->
