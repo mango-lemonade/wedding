@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions — Spencer & Jenna 2027</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ── Closing + Footer (section-specific) ── */
+    .section--closing {
+      background: var(--green-dark);
+      color: var(--cream);
+      text-align: center;
+      padding: var(--space-3xl) var(--space-lg);
+    }
+
+    .closing__headline {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin-bottom: var(--space-lg);
+      color: var(--cream);
+    }
+
+    .closing__body {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(251, 251, 251, 0.7);
+      max-width: 580px;
+      margin: 0 auto var(--space-2xl);
+    }
+
+    .closing__ctas {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 2.25rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .cta-btn--lime {
+      background-color: var(--lime);
+      color: var(--green-dark);
+      border: 1.5px solid var(--lime);
+    }
+
+    .cta-btn--lime:hover {
+      background-color: var(--lime-light);
+      border-color: var(--lime-light);
+    }
+
+    .cta-btn--outline {
+      background-color: transparent;
+      color: rgba(251, 251, 251, 0.8);
+      border: 1.5px solid rgba(251, 251, 251, 0.3);
+    }
+
+    .cta-btn--outline:hover {
+      color: var(--cream);
+      border-color: rgba(251, 251, 251, 0.6);
+    }
+
+    .site-footer {
+      background-color: var(--green-dark);
+      text-align: center;
+      padding: var(--space-lg) var(--space-lg) var(--space-xl);
+      position: relative;
+    }
+
+    .site-footer::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--lime) 20%, var(--lime) 80%, transparent 100%);
+      opacity: 0.5;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .footer__names {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(251, 251, 251, 0.4);
+    }
+
+    @media (min-width: 768px) {
+      .section--closing { padding: var(--space-3xl) var(--space-2xl) calc(var(--space-3xl) + var(--space-lg)); }
+    }
+
+    @media (min-width: 1024px) {
+      .section--closing { padding: calc(var(--space-3xl) + var(--space-xl)) var(--space-2xl) calc(var(--space-3xl) + var(--space-2xl)); }
+    }
+  </style>
+</head>
+<body>
+
+  <section id="questions" class="section--closing">
+    <h2 class="closing__headline">Questions? Just ask.</h2>
+
+    <p class="closing__body">
+      We kept our list small because we really hope to share this weekend with just the people who mean the most to us. We hope you can make it. Big Sur's magic will make it all make sense once you're there. Sharing our wedding weekend with you is something we'll carry for the rest of our lives.
+    </p>
+
+    <div class="closing__ctas">
+      <a href="mailto:" class="cta-btn cta-btn--lime">Email Us</a>
+      <a href="#hero" class="cta-btn cta-btn--outline">Back to Top</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span class="footer__names">Spencer &amp; Jenna</span>
+  </footer>
+
+</body>
+</html>
