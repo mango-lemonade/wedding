@@ -2,168 +2,73 @@
   const root = document.querySelector('[data-illustrated-map]');
   if (!root) return;
 
-  // Added ./ for better GitHub Pages compatibility
   const jsonUrl = root.getAttribute('data-places-url') || './assets/data/places.json';
   const stage = root.querySelector('.illustrated-map-stage');
   const hotspotLayer = root.querySelector('.illustrated-map-hotspots');
-  const panel = root.querySelector('.illustrated-map-panel');
-  const eyebrowEl = root.querySelector('.illustrated-map-panel-eyebrow');
-  const titleEl = root.querySelector('.illustrated-map-panel-title');
-  const descEl = root.querySelector('.illustrated-map-panel-desc');
-  const imgWrap = root.querySelector('.illustrated-map-panel-image-wrap');
-  const imgEl = root.querySelector('.illustrated-map-panel-image');
+  const scrollContent = document.querySelector('.places-scroll-content');
 
   let places = [];
   let activeId = null;
-  let hideTimer = null;
+  let observer = null;
 
-  function cancelHideHover() {
-    if (hideTimer) {
-      clearTimeout(hideTimer);
-      hideTimer = null;
-    }
-  }
+  /**
+   * Updates the active state of map hotspots, content cards, and the background image.
+   */
+  function setActive(id) {
+    if (activeId === id) return;
+    activeId = id;
 
-  function scheduleHideHover() {
-    cancelHideHover();
-    hideTimer = window.setTimeout(() => {
-      hideTimer = null;
-      setActive(null);
-    }, 160);
-  }
+    const place = places.find((p) => p.id === id);
 
-  function clearPanelPosition() {
-    if (!panel) return;
-    panel.style.removeProperty('--panel-left-px');
-    panel.style.removeProperty('--panel-top-px');
-  }
-
-  function positionPanel(hotspotEl) {
-    if (!hotspotEl || !stage || !panel) return;
-    const leftPct = parseFloat(hotspotEl.style.left);
-    const topPct = parseFloat(hotspotEl.style.top);
-    if (Number.isNaN(leftPct) || Number.isNaN(topPct)) return;
-
-    const apply = () => {
-      if (!panel.classList.contains('is-open') || panel.classList.contains('is-centered')) return;
-      const inset = 10;
-      const gap = 14;
-      const stageW = stage.clientWidth;
-      const stageH = stage.clientHeight;
-      if (!stageW || !stageH) return;
-
-      const pinX = (leftPct / 100) * stageW;
-      const pinY = (topPct / 100) * stageH;
-
-      const pw = panel.offsetWidth;
-      const ph = panel.offsetHeight;
-      if (!pw || !ph) return;
-
-      const topIfAbove = pinY - gap - ph;
-      const topIfBelow = pinY + gap;
-      let preferBelow = topPct < 32;
-
-      let top;
-      let below = preferBelow;
-      if (preferBelow) {
-        top = topIfBelow;
-        if (top + ph > stageH - inset) {
-          below = false;
-          top = topIfAbove;
-        }
-      } else {
-        top = topIfAbove;
-        if (top < inset) {
-          below = true;
-          top = topIfBelow;
-        }
-      }
-
-      top = Math.max(inset, Math.min(top, stageH - ph - inset));
-      let left = pinX - pw / 2;
-      left = Math.max(inset, Math.min(left, stageW - pw - inset));
-
-      panel.classList.toggle('is-flipped', below);
-      panel.style.setProperty('--panel-left-px', `${Math.round(left)}px`);
-      panel.style.setProperty('--panel-top-px', `${Math.round(top)}px`);
-    };
-
-    requestAnimationFrame(() => requestAnimationFrame(apply));
-  }
-
-  function setPanelContent(place) {
-    if (!place) {
-      if (eyebrowEl) eyebrowEl.textContent = '';
-      if (titleEl) titleEl.textContent = '';
-      if (descEl) descEl.textContent = '';
-      if (imgWrap) imgWrap.hidden = true;
-      if (imgEl) imgEl.removeAttribute('src');
-      return;
-    }
-    if (eyebrowEl) eyebrowEl.textContent = place.eyebrow || '';
-    if (titleEl) titleEl.textContent = place.title || '';
-    if (descEl) descEl.textContent = place.desc || '';
-    
-    if (imgWrap && imgEl) {
-      if (place.image) {
-        imgEl.onload = null;
-        imgEl.src = place.image;
-        imgEl.alt = place.title || '';
-        imgWrap.hidden = false;
-        const repositionForImage = () => {
-          const id = place.id;
-          const btn = hotspotLayer.querySelector(`[data-place-id="${CSS.escape(id)}"]`);
-          if (btn && activeId === id) positionPanel(btn);
-        };
-        imgEl.onload = repositionForImage;
-        if (imgEl.complete) requestAnimationFrame(repositionForImage);
-      } else {
-        imgEl.removeAttribute('src');
-        imgWrap.hidden = true;
-      }
-    }
-  }
-
-  function syncHotspotUi(id) {
+    // Update Hotspots
     hotspotLayer.querySelectorAll('.illustrated-map-hotspot').forEach((btn) => {
-      const on = btn.dataset.placeId === id;
-      btn.classList.toggle('is-active', on);
-      btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+      const isActive = btn.dataset.placeId === id;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    });
+
+    // Update Cards
+    if (scrollContent) {
+      scrollContent.querySelectorAll('.place-card').forEach((card) => {
+        card.classList.toggle('is-active', card.dataset.placeId === id);
+      });
+    }
+
+    // Map background image update removed to keep map clean as per requirements
+  }
+
+  /**
+   * Generates the scrollable content cards dynamically.
+   */
+  function buildCards() {
+    if (!scrollContent) return;
+    scrollContent.innerHTML = '';
+
+    places.forEach((place) => {
+      const card = document.createElement('div');
+      card.className = 'place-card';
+      card.dataset.placeId = place.id;
+
+      const imageHtml = place.image
+        ? `<div class="place-card-image"><img src="${place.image}" alt="${place.title || ''}" loading="lazy"></div>`
+        : '';
+
+      const content = `
+        <span class="eyebrow">${place.eyebrow || ''}</span>
+        <h3>${place.title || ''}</h3>
+        <p>${place.desc || ''}</p>
+        ${imageHtml}
+      `;
+      card.innerHTML = content;
+      scrollContent.appendChild(card);
     });
   }
 
-  function setActive(id, opts = {}) {
-    const { positionEl = null, centered = false } = opts;
-
-    activeId = id;
-    const place = id ? places.find((p) => p.id === id) : null;
-    syncHotspotUi(id);
-
-    if (!place) {
-      cancelHideHover();
-      panel.classList.remove('is-open', 'is-flipped', 'is-centered');
-      clearPanelPosition();
-      setPanelContent(null);
-      return;
-    }
-
-    setPanelContent(place);
-    if (centered) {
-      clearPanelPosition();
-      panel.classList.add('is-centered');
-      panel.classList.remove('is-flipped');
-      panel.classList.add('is-open');
-      return;
-    }
-
-    panel.classList.remove('is-centered');
-    panel.classList.add('is-open');
-    const el = positionEl || hotspotLayer.querySelector(`[data-place-id="${CSS.escape(id)}"]`);
-    if (el) positionPanel(el);
-  }
-
-  function build(loaded) {
-    places = loaded.places || [];
+  /**
+   * Sets up hotspots on the map.
+   */
+  function buildHotspots() {
+    if (!hotspotLayer) return;
     hotspotLayer.innerHTML = '';
 
     places.forEach((place) => {
@@ -174,58 +79,71 @@
       btn.style.left = `${place.x}%`;
       btn.style.top = `${place.y}%`;
       btn.setAttribute('aria-label', place.title || place.id);
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-controls', 'map-detail');
 
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        cancelHideHover();
-        if (activeId === place.id) setActive(null);
-        else setActive(place.id, { positionEl: btn });
-      });
-
-      // Use pointerType === 'mouse' so hover works on hybrid/touch laptops where
-      // (hover: hover) is false — common on Windows + GitHub Pages testing.
-      btn.addEventListener('pointerenter', (e) => {
-        if (e.pointerType !== 'mouse') return;
-        cancelHideHover();
-        setActive(place.id, { positionEl: btn });
-      });
-
-      btn.addEventListener('pointerleave', (e) => {
-        if (e.pointerType !== 'mouse') return;
-        scheduleHideHover();
+      // Clicking a hotspot scrolls the corresponding card into view
+      btn.addEventListener('click', () => {
+        const card = scrollContent.querySelector(`[data-place-id="${CSS.escape(place.id)}"]`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       });
 
       hotspotLayer.appendChild(btn);
     });
+  }
 
-    if (panel) {
-      panel.addEventListener('pointerenter', cancelHideHover);
-      panel.addEventListener('pointerleave', (e) => {
-        if (e.pointerType !== 'mouse') return;
-        scheduleHideHover();
+  /**
+   * Initializes the Intersection Observer to trigger state changes during scroll.
+   */
+  function initScrollObserver() {
+    // The "trigger zone" is the middle 20% of the viewport
+    const options = {
+      root: null,
+      rootMargin: '-40% 0% -40% 0%',
+      threshold: 0
+    };
+
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.dataset.placeId);
+        }
       });
-    }
+    }, options);
 
-    window.addEventListener('resize', () => {
-      if (!activeId || !panel.classList.contains('is-open')) return;
-      if (panel.classList.contains('is-centered')) return;
-      const btn = hotspotLayer.querySelector(`[data-place-id="${CSS.escape(activeId)}"]`);
-      if (btn) positionPanel(btn);
+    scrollContent.querySelectorAll('.place-card').forEach((card) => {
+      observer.observe(card);
     });
   }
 
-  fetch(jsonUrl)
-    .then((r) => {
-      if (!r.ok) throw new Error(String(r.status));
-      return r.json();
-    })
-    .then(build)
-    .catch((err) => {
-      console.error("Map Load Error:", err);
-      titleEl.textContent = 'Map unavailable';
-      descEl.textContent = 'Could not load place data.';
-      panel.classList.add('is-centered', 'is-open');
-    });
+  /**
+   * Entry point: fetch data and build the UI.
+   */
+  async function init() {
+    try {
+      // Add cache-buster to ensure we always get the latest Deetjen-free JSON
+      const timestamp = new Date().getTime();
+      const fetchUrl = `${jsonUrl}?v=${timestamp}`;
+      
+      const response = await fetch(fetchUrl);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
+      
+      places = data.places || [];
+
+      buildHotspots();
+      buildCards();
+      initScrollObserver();
+
+      // Set initial active state to the first place
+      if (places.length > 0) {
+        setActive(places[0].id);
+      }
+    } catch (err) {
+      console.error("Scrollytelling Map Load Error:", err);
+    }
+  }
+
+  // Run the initialization
+  init();
 })();
