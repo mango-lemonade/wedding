@@ -1,0 +1,76 @@
+{
+  "places": [
+    {
+      "id": "molera",
+      "x": 25.1,
+      "y": 23.5,
+      "eyebrow": "Our favorite hike",
+      "title": "Andrew Molera State Park",
+      "desc": "A park with a stunning trail system with ridges, meadows, redwoods, bluffs, beaches, and wildflowers."
+    },
+    {
+      "id": "village",
+      "x": 34.0,
+      "y": 30.5,
+      "eyebrow": "Our fav coffee spot",
+      "title": "The Village",
+      "desc": "The best latte in town. Also home to the fantastic restaurant, Solstice."
+    },
+    {
+      "id": "lodge",
+      "x": 39.5,
+      "y": 38.0,
+      "eyebrow": "Our room block",
+      "title": "The Big Sur Lodge",
+      "desc": "Where we will be staying with our families all weekend. Our room block is here — close to everything, the most shuttle options to/from the wedding."
+    },
+    {
+      "id": "pfeiffer",
+      "x": 32.5,
+      "y": 43.5,
+      "eyebrow": "Our sunset spot",
+      "title": "Pfeiffer Beach",
+      "desc": "A breathtaking natural purple sand beach with dramatic arches, islands, and sea stacks. A true Northern CA beach, so expect wind."
+    },
+    {
+      "id": "ventana",
+      "x": 44.8,
+      "y": 44.5,
+      "eyebrow": "Our go-to lodging",
+      "title": "Ventana Campground",
+      "desc": "The best glamping California has to offer. We have stayed in these redwoods many times — including when we got engaged."
+    },
+    {
+      "id": "surhouse",
+      "x": 46.2,
+      "y": 47.5,
+      "eyebrow": "Our finest dining",
+      "title": "The Sur House",
+      "desc": "Our favorite fine dining in the region, and where Spencer proposed. If you are in the mood to splurge, the food beats the location, and the location is extraordinary."
+    },
+    {
+      "id": "nepenthe",
+      "x": 44.5,
+      "y": 50.8,
+      "eyebrow": "Quintessential Big Sur",
+      "title": "Nepenthe and Cafe Kevah",
+      "desc": "One of the most iconic casual restaurants on the California coast. Jenna's parents have been coming here since the 80s. Our farewell coffee on Monday."
+    },
+    {
+      "id": "pullout",
+      "x": 58.0,
+      "y": 63.5,
+      "eyebrow": "Our favorite highway pullout",
+      "title": "Spencer & Jenna's View",
+      "desc": "The view on the art print we sent you is the exact spot where Spencer first blurted out I Love You back in 2018."
+    },
+    {
+      "id": "mcway",
+      "x": 67.5,
+      "y": 76.5,
+      "eyebrow": "View Spot",
+      "title": "McWay Falls",
+      "desc": "One of the stunning wonders of Big Sur. A short walk from the highway, unmissable."
+    }
+  ]
+}
