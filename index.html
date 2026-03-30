@@ -614,6 +614,132 @@
       .room-block-header { flex-direction: column; }
       .recommended-pill { margin-top: 0; align-self: flex-start; }
     }
+
+    /* ── Getting Around (section-specific styles) ── */
+    .section--getting-around {
+      background: var(--cream);
+      padding: var(--space-3xl) var(--space-md);
+    }
+
+    .getting-around__inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .getting-around__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: var(--space-sm);
+    }
+
+    .getting-around__title {
+      font-size: clamp(2.25rem, 5vw, 3rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: var(--space-xl);
+    }
+
+    .subsection-title {
+      font-size: clamp(1.4rem, 3vw, 1.75rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: var(--space-md);
+    }
+
+    .getting-around__text {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-bottom: var(--space-lg);
+    }
+
+    .getting-around__text:last-child {
+      margin-bottom: 0;
+    }
+
+    .getting-around__subsection {
+      margin-bottom: var(--space-xl);
+    }
+
+    .getting-around__subsection:last-child {
+      margin-bottom: 0;
+    }
+
+    .callout-box {
+      background: var(--lime-pale);
+      border-left: 3px solid var(--lime);
+      padding: var(--space-lg);
+      border-radius: 0 6px 6px 0;
+      margin-top: var(--space-lg);
+    }
+
+    .callout-box__text {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .callout-box__text strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .airport-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+
+    .airport-card {
+      background: var(--lime-pale);
+      border-radius: 8px;
+      padding: var(--space-lg);
+    }
+
+    .airport-card__name {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+    }
+
+    .airport-card__drive {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--lime);
+      margin-bottom: var(--space-sm);
+    }
+
+    .airport-card__desc {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    @media (min-width: 768px) {
+      .section--getting-around { padding: var(--space-3xl) var(--space-xl); }
+      .callout-box { padding: var(--space-lg) var(--space-xl); }
+      .airport-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .section--getting-around { padding: 8rem var(--space-xl); }
+      .getting-around__inner { max-width: 800px; }
+    }
   </style>
 </head>
 <body>
@@ -928,8 +1054,64 @@
     </div>
   </section>
 
-  <!-- ════ SHUTTLES ════ -->
-  <!-- sections/shuttles.html -->
+  <!-- ════ SHUTTLES / GETTING AROUND ════ -->
+  <section id="shuttles" class="section--getting-around">
+    <div class="getting-around__inner">
+
+      <p class="getting-around__eyebrow">Getting Around</p>
+      <h2 class="getting-around__title">Getting Around</h2>
+
+      <div class="getting-around__subsection">
+        <h3 class="subsection-title">Wedding Day Shuttles</h3>
+        <p class="getting-around__text">
+          There is no parking at the venue. Shuttles will be provided to and from the ceremony and reception — this is the plan, no exceptions, on a night with an open bar on Highway&nbsp;1.
+        </p>
+        <div class="callout-box">
+          <p class="callout-box__text">
+            <strong>Staying outside Big Sur Lodge?</strong> You may need to make your way to the Lodge to catch the primary shuttle, or coordinate with us to arrange a single pickup at a specific time. Please let us know where you're staying so we can plan. Full shuttle schedules will come in a future update closer to the date.
+          </p>
+        </div>
+      </div>
+
+      <div class="getting-around__subsection">
+        <h3 class="subsection-title">Getting Around Big Sur</h3>
+        <p class="getting-around__text">
+          Outside of the wedding day shuttles, having a car in Big Sur is essentially required — there are no Ubers, no rideshares, and no public transit. If you're flying in from out of state, we'd recommend renting a car. If you're driving up from California, consider coordinating with others who might be coming from your direction.
+        </p>
+      </div>
+
+      <div class="getting-around__subsection">
+        <h3 class="subsection-title">Airports &amp; Getting Here</h3>
+        <p class="getting-around__text">
+          Big Sur sits on Highway&nbsp;1 between Carmel and San Simeon — remote and beautiful. The drive in is genuinely one of the most scenic roads in the world, so getting here is already part of the experience. Closest airports and approximate drive times:
+        </p>
+
+        <div class="airport-cards">
+          <div class="airport-card">
+            <h4 class="airport-card__name">Monterey Regional (MRY)</h4>
+            <p class="airport-card__drive">~45 minutes</p>
+            <p class="airport-card__desc">The most convenient option — small airport with limited routes, but if you can get a flight here it's by far the easiest landing spot.</p>
+          </div>
+          <div class="airport-card">
+            <h4 class="airport-card__name">San Jose (SJC)</h4>
+            <p class="airport-card__drive">~2.5 hours</p>
+            <p class="airport-card__desc">Good budget and Southwest options, less congested than SFO, and a very easy drive down through the Santa Cruz mountains.</p>
+          </div>
+          <div class="airport-card">
+            <h4 class="airport-card__name">San Francisco (SFO)</h4>
+            <p class="airport-card__drive">~3 hours</p>
+            <p class="airport-card__desc">The most flight options from anywhere in the country. Longer drive, but Highway&nbsp;1 south from the Bay Area is beautiful and worth it.</p>
+          </div>
+          <div class="airport-card">
+            <h4 class="airport-card__name">Los Angeles (LAX)</h4>
+            <p class="airport-card__drive">~5–6 hours</p>
+            <p class="airport-card__desc">Worth it if you're coming from SoCal — drive north up the 101 or catch Highway&nbsp;1 at San Luis Obispo for a stunning coastal approach into Big Sur.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ════ QUESTIONS ════ -->
   <!-- sections/questions.html -->
