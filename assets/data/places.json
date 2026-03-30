@@ -2,8 +2,8 @@
   "places": [
     {
       "id": "molera",
-      "x": 25.1,
-      "y": 23.5,
+      "x": 25.15,
+      "y": 23.24,
       "eyebrow": "Our favorite hike",
       "title": "Andrew Molera State Park",
       "desc": "A park with a stunning trail system with ridges, meadows, redwoods, bluffs, beaches, and wildflowers.",
@@ -11,8 +11,8 @@
     },
     {
       "id": "village",
-      "x": 34.0,
-      "y": 30.5,
+      "x": 34.09,
+      "y": 30.83,
       "eyebrow": "Our fav coffee spot",
       "title": "The Village",
       "desc": "The best latte in town. Also home to the fantastic restaurant, Solstice.",
@@ -20,8 +20,8 @@
     },
     {
       "id": "lodge",
-      "x": 39.5,
-      "y": 38.0,
+      "x": 39.62,
+      "y": 38.20,
       "eyebrow": "Our room block",
       "title": "The Big Sur Lodge",
       "desc": "Where we will be staying with our families all weekend. Our room block is here.",
@@ -29,8 +29,8 @@
     },
     {
       "id": "pfeiffer",
-      "x": 32.5,
-      "y": 43.5,
+      "x": 32.38,
+      "y": 43.47,
       "eyebrow": "Our sunset spot",
       "title": "Pfeiffer Beach",
       "desc": "A breathtaking natural purple sand beach with dramatic arches.",
@@ -38,8 +38,8 @@
     },
     {
       "id": "ventana",
-      "x": 44.8,
-      "y": 44.5,
+      "x": 44.81,
+      "y": 43.41,
       "eyebrow": "Our go-to lodging",
       "title": "Ventana Campground",
       "desc": "The best glamping California has to offer.",
@@ -47,8 +47,8 @@
     },
     {
       "id": "surhouse",
-      "x": 46.2,
-      "y": 47.5,
+      "x": 46.09,
+      "y": 47.56,
       "eyebrow": "Our finest dining",
       "title": "The Sur House",
       "desc": "Our favorite fine dining in the region, and where Spencer proposed.",
@@ -56,8 +56,8 @@
     },
     {
       "id": "nepenthe",
-      "x": 44.5,
-      "y": 50.8,
+      "x": 44.44,
+      "y": 50.88,
       "eyebrow": "Quintessential Big Sur",
       "title": "Nepenthe and Cafe Kevah",
       "desc": "One of the most iconic casual restaurants on the California coast.",
@@ -65,8 +65,8 @@
     },
     {
       "id": "pullout",
-      "x": 58.0,
-      "y": 63.5,
+      "x": 57.95,
+      "y": 63.60,
       "eyebrow": "Our favorite highway pullout",
       "title": "Spencer & Jenna's View",
       "desc": "The exact spot where Spencer first blurted out I Love You back in 2018.",
@@ -74,8 +74,8 @@
     },
     {
       "id": "mcway",
-      "x": 67.5,
-      "y": 76.5,
+      "x": 67.59,
+      "y": 76.25,
       "eyebrow": "View Spot",
       "title": "McWay Falls",
       "desc": "One of the stunning wonders of Big Sur.",

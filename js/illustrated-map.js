@@ -20,12 +20,20 @@
 
     const place = places.find((p) => p.id === id);
 
-    // Update Hotspots
-    hotspotLayer.querySelectorAll('.illustrated-map-hotspot').forEach((btn) => {
-      const isActive = btn.dataset.placeId === id;
-      btn.classList.toggle('is-active', isActive);
-      btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-    });
+    // Update SVG Circles intrinsically embedded in the SVG map
+    const stage = document.querySelector('.illustrated-map-art');
+    if (stage) {
+      places.forEach((place) => {
+        const circle = stage.querySelector(`#dot-${place.id}`);
+        if (circle) {
+          if (place.id === id) {
+            circle.classList.add('is-active');
+          } else {
+            circle.classList.remove('is-active');
+          }
+        }
+      });
+    }
 
     // Update Cards
     if (scrollContent) {
@@ -42,7 +50,7 @@
    */
   function buildCards() {
     if (!scrollContent) return;
-    scrollContent.innerHTML = '';
+    scrollContent.innerHTML = '<div class="places-scroll-spacer"></div>';
 
     places.forEach((place) => {
       const card = document.createElement('div');
@@ -65,30 +73,23 @@
   }
 
   /**
-   * Sets up hotspots on the map.
+   * Sets up native SVG circle listeners on the map.
    */
   function buildHotspots() {
-    if (!hotspotLayer) return;
-    hotspotLayer.innerHTML = '';
+    const stage = document.querySelector('.illustrated-map-art');
+    if (!stage) return;
 
     places.forEach((place) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'illustrated-map-hotspot';
-      btn.dataset.placeId = place.id;
-      btn.style.left = `${place.x}%`;
-      btn.style.top = `${place.y}%`;
-      btn.setAttribute('aria-label', place.title || place.id);
-
-      // Clicking a hotspot scrolls the corresponding card into view
-      btn.addEventListener('click', () => {
-        const card = scrollContent.querySelector(`[data-place-id="${CSS.escape(place.id)}"]`);
-        if (card) {
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      });
-
-      hotspotLayer.appendChild(btn);
+      const circle = stage.querySelector(`#dot-${place.id}`);
+      if (circle) {
+        // Clicking a native SVG dot scrolls the corresponding card into view
+        circle.addEventListener('click', () => {
+          const card = scrollContent.querySelector(`[data-place-id="${CSS.escape(place.id)}"]`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      }
     });
   }
 
@@ -96,19 +97,32 @@
    * Initializes the Intersection Observer to trigger state changes during scroll.
    */
   function initScrollObserver() {
-    // The "trigger zone" is the middle 20% of the viewport
+    // Widen trigger zone to the middle 40% of the viewport to prevent 0-state flicker gap between cards
     const options = {
       root: null,
-      rootMargin: '-40% 0% -40% 0%',
+      rootMargin: '-30% 0% -30% 0%',
       threshold: 0
     };
 
     observer = new IntersectionObserver((entries) => {
+      let newlyActive = null;
+      let clearActive = false;
+
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActive(entry.target.dataset.placeId);
+          newlyActive = entry.target.dataset.placeId;
+        } else {
+          if (activeId === entry.target.dataset.placeId) {
+            clearActive = true;
+          }
         }
       });
+
+      if (newlyActive) {
+        setActive(newlyActive);
+      } else if (clearActive) {
+        setActive(null);
+      }
     }, options);
 
     scrollContent.querySelectorAll('.place-card').forEach((card) => {
@@ -124,21 +138,16 @@
       // Add cache-buster to ensure we always get the latest Deetjen-free JSON
       const timestamp = new Date().getTime();
       const fetchUrl = `${jsonUrl}?v=${timestamp}`;
-      
+
       const response = await fetch(fetchUrl);
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
-      
+
       places = data.places || [];
 
       buildHotspots();
       buildCards();
       initScrollObserver();
-
-      // Set initial active state to the first place
-      if (places.length > 0) {
-        setActive(places[0].id);
-      }
     } catch (err) {
       console.error("Scrollytelling Map Load Error:", err);
     }
