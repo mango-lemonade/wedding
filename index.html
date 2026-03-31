@@ -110,7 +110,7 @@
     /* Section intro */
     .section-intro {
       font-size: clamp(14px, 2vw, 16px);
-      color: var(--text-muted);
+      color: #435444;
       line-height: 1.85;
       max-width: 620px;
       font-weight: 300;
@@ -141,6 +141,43 @@
       padding: 88px 28px 76px;
       position: relative;
       overflow: hidden;
+    }
+
+    /* ── HERO SCROLL CHEVRON ── */
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      animation: fadeUp 0.65s ease 1.0s both;
+    }
+
+    .hero-scroll-hint span {
+      display: block;
+      width: 1px;
+      height: 28px;
+      background: rgba(251, 251, 251, 0.25);
+      animation: scrollLine 1.8s ease-in-out 1.2s infinite;
+    }
+
+    .hero-scroll-hint svg {
+      color: rgba(251, 251, 251, 0.35);
+      animation: scrollBounce 1.8s ease-in-out 1.2s infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.25; }
+      50% { opacity: 0.6; }
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.35; }
+      50% { transform: translateY(4px); opacity: 0.7; }
     }
 
     .hero::before {
@@ -251,6 +288,19 @@
 
     .page-nav a:hover {
       color: var(--teal);
+    }
+
+    /* Mobile nav: fade-right edge hint for scrollability */
+    @media (max-width: 600px) {
+      .page-nav {
+        padding: 0;
+        -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+        mask-image: linear-gradient(to right, black 80%, transparent 100%);
+      }
+      .page-nav ul {
+        justify-content: flex-start;
+        padding: 0 16px;
+      }
     }
 
     /* ── TLDR CARD ── */
@@ -544,6 +594,7 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       font-weight: 500;
+      line-height: 1;
       border-radius: 2px;
       text-decoration: none;
       cursor: pointer;
@@ -554,6 +605,7 @@
     .btn-primary {
       background: var(--teal);
       color: #0C260F;
+      border: 1px solid transparent;
     }
 
     .btn-primary:hover {
@@ -569,6 +621,47 @@
 
     .btn-secondary:hover {
       border-color: var(--text-muted);
+    }
+
+    /* ── FAMILY-ONLY EVENT TREATMENT ── */
+    .event-item.family-only .event-desc strong,
+    .event-item.family-only .event-desc p,
+    .event-item.friends-rec .event-desc strong,
+    .event-item.friends-rec .event-desc p {
+      opacity: 0.55;
+    }
+
+    .event-item.family-only .event-time,
+    .event-item.friends-rec .event-time {
+      opacity: 0.45;
+    }
+
+    .family-tag {
+      display: inline-block;
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--sand);
+      border: 1px solid var(--rule);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+      margin-top: 6px;
+    }
+
+    .friends-tag {
+      display: inline-block;
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--sand);
+      border: 1px solid var(--rule);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+      margin-top: 6px;
     }
 
     /* ── CTA SECTION ── */
@@ -600,6 +693,33 @@
       margin: 0 auto 36px;
       line-height: 1.8;
       font-weight: 300;
+    }
+
+    /* CTA button group */
+    .cta-btn-group {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn-group .btn {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .cta-btn-group {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 280px;
+        margin: 0 auto;
+      }
+      .cta-btn-group .btn {
+        text-align: center;
+        margin-left: 0 !important;
+        white-space: nowrap;
+      }
     }
 
     /* ── FOOTER ── */
@@ -783,242 +903,287 @@
       }
     }
 
-    /* ── ILLUSTRATED MAP SCROLLYTELLING ── */
-    .places-scrollytelling {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      margin-top: 40px;
-      position: relative;
-    }
+    /* ── ILLUSTRATED MAP: EXPLORE ON DEMAND ── */
 
-    @media (min-width: 1024px) {
-      .places-scrollytelling {
-        /* BREAK OUT of parent container for true Full-Width Stage */
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
-        display: grid;
-        grid-template-columns: 1fr;
-        align-items: start;
-        gap: 0;
-        overflow: clip;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      /* Width breakout handled by .places-scrollytelling */
-    }
-
-    .places-sticky-map {
-      position: sticky;
-      /* Top coordinate should match nav height */
-      top: 80px;
-      /* Ensure the map box fills the viewport height for centering */
-      height: calc(100vh - 80px);
+    /* Invite prompt */
+    .map-invite {
       display: flex;
       align-items: center;
-      justify-content: center;
-      z-index: 50;
-      /* Pinned on top for mobile */
-      background: var(--sand);
+      gap: 8px;
+      margin-top: 28px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: opacity 0.6s ease;
     }
 
-    @media (min-width: 1024px) {
-      .places-sticky-map {
-        grid-column: 1 / -1;
-        grid-row: 1;
-        width: 100%;
-        /* Map stage handles its own centering/resolution */
-        z-index: 1;
-      }
+    .map-invite.is-hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    @media (max-width: 1023px) {
-      .places-sticky-map {
-        top: 50px;
-        height: 40vh;
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
-        background: var(--sand);
-        border-bottom: 1px solid var(--rule);
-        z-index: 100;
-        /* Ensure it stays on top of cards during scroll */
-        /* Flex override for mobile as it vertical stacks */
-        display: block;
-      }
+    .map-invite-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      animation: invitePulse 2s ease-in-out infinite;
     }
 
+    @keyframes invitePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    /* Map container */
+    .places-map-wrap {
+      margin-top: 12px;
+      position: relative;
+    }
+
+    /* Map stage */
     .illustrated-map-stage {
       position: relative;
-      /* Maximize width/height while preserving aspect ratio and visibility */
       width: 100%;
-      height: 100%;
-      max-width: calc((100vh - 120px) * (1029 / 770));
-      max-height: 100%;
-      margin: 0 auto;
       aspect-ratio: 1029 / 770;
-      border-radius: 3px;
+      border-radius: 6px;
       overflow: hidden;
-      background: var(--sand);
       border: 1px solid var(--rule);
-      /* Transition for background image change */
-      transition: background-image 0.4s ease-in-out;
-      background-size: cover;
-      background-position: center;
+      background: var(--sand);
     }
 
-    /* Overlay for legend/labels if needed - currently using the SVG */
     .illustrated-map-art {
       display: block;
       width: 100%;
       height: 100%;
-      /* Use fill to ensure X/Y percentage alignment is perfect with container */
       object-fit: fill;
-      object-position: center;
       pointer-events: none;
       user-select: none;
-      position: relative;
-      z-index: 1;
-      /* Clean map: 100% opaque, no mix-blend or overlay */
       opacity: 1;
     }
 
-    .places-scroll-content {
-      padding-bottom: 60vh;
-      /* Allow last card to reach the trigger zone */
-      scroll-snap-type: y proximity;
-      /* Proximity snap prevents sticking and flickering */
-      z-index: 10;
+    /* SVG hotspot dots */
+    .illustrated-map-art circle.cls-1 {
+      cursor: pointer;
+      pointer-events: auto;
+      transform-origin: center;
+      transform-box: fill-box;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  fill 0.2s ease,
+                  stroke 0.2s ease,
+                  stroke-width 0.2s ease;
+      fill: var(--teal);
+      stroke: var(--cream);
+      stroke-width: 2px;
     }
 
-    .places-scroll-spacer {
-      height: 60vh;
-      /* Intro delay: see map alone */
-      scroll-snap-align: center;
-      pointer-events: none;
+    .illustrated-map-art circle.cls-1:hover,
+    .illustrated-map-art circle.cls-1.is-hovered {
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 4px rgba(141, 179, 42, 0.55));
     }
 
-    @media (max-width: 1023px) {
-      .places-scroll-spacer {
-        height: 40vh;
-      }
+    .illustrated-map-art circle.cls-1.is-active {
+      fill: #ffffff;
+      transform: scale(1.5);
+      stroke: var(--teal);
+      stroke-width: 3px;
+      filter: drop-shadow(0 0 7px rgba(141, 179, 42, 0.8));
     }
 
-    @media (min-width: 1024px) {
-      .places-scroll-content {
-        grid-column: 1 / -1;
-        grid-row: 1;
-        /* Ensure clicks reach the map in empty areas */
-        pointer-events: none;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-      }
-    }
-
-    .place-card {
-      min-height: 50vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px 0;
+    /* ── DESKTOP QUICK-LOOK CARD ── */
+    .map-quicklook {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 280px;
+      background: rgba(251, 251, 251, 0.97);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+      padding: 22px 22px 18px;
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.5s ease, transform 0.5s ease, background 0.5s ease;
-      scroll-snap-align: center;
-      will-change: transform, opacity;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform: translateY(-4px);
+      z-index: 20;
     }
 
-    @media (min-width: 1024px) {
-      .place-card {
-        pointer-events: auto;
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: 10vw;
-        /* Position over the 'ocean' side of Highway 1 */
-        /* Add a glassmorphism effect for readability over the map */
-        background: rgba(251, 251, 251, 0.85);
-        backdrop-filter: blur(12px);
-        padding: 40px;
-        border-radius: 8px;
-        border: 1px solid var(--rule);
-        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
-        margin-bottom: 25vh;
-        /* space between cards for clean transitions */
-      }
-
-      .place-card.is-active {
-        background: rgba(251, 251, 251, 0.98);
-        transform: translateX(-10px);
-      }
-    }
-
-    .place-card.is-active {
+    .map-quicklook.is-visible {
       opacity: 1;
+      pointer-events: auto;
       transform: translateY(0);
     }
 
-    .place-card .eyebrow {
-      margin-bottom: 12px;
+    /* Hide quicklook on touch / mobile */
+    @media (hover: none) {
+      .map-quicklook {
+        display: none !important;
+      }
     }
 
-    .place-card h3 {
+    .map-quicklook-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .map-quicklook-title {
       font-family: 'Isabella Sans', serif;
-      font-size: clamp(24px, 4vw, 32px);
+      font-size: 20px;
       font-weight: 400;
       color: var(--text);
-      margin-bottom: 16px;
       line-height: 1.2;
+      margin-bottom: 8px;
     }
 
-    .place-card p {
-      font-size: 16px;
+    .map-quicklook-desc {
+      font-size: 13px;
       color: var(--text-muted);
-      line-height: 1.8;
-      max-width: 480px;
-      margin-bottom: 24px;
+      line-height: 1.65;
+      font-weight: 300;
     }
 
-    .place-card-image {
-      margin-top: 16px;
+    .map-quicklook-image {
+      margin-top: 14px;
       border-radius: 4px;
       overflow: hidden;
-      border: 1px solid var(--rule);
       aspect-ratio: 16 / 9;
     }
 
-    .place-card-image img {
+    .map-quicklook-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .illustrated-map-art circle.cls-1 {
-      cursor: pointer;
-      pointer-events: auto;
-      transform-origin: center;
-      transform-box: fill-box;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.3s ease, stroke-width 0.3s ease;
-      fill: var(--teal);
-      stroke: var(--cream);
-      stroke-width: 2px;
+    /* ── MOBILE BOTTOM DRAWER ── */
+    .map-drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 38, 15, 0.35);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .illustrated-map-art circle.cls-1.is-active {
-      fill: var(--green-dark);
-      transform: scale(1.5);
-      stroke: var(--teal-pale);
-      stroke-width: 4px;
+    .map-drawer-overlay.is-open {
+      opacity: 1;
     }
 
-    @media (max-width: 1023px) {
-      .illustrated-map-stage {
-        height: 100%;
-        border: none;
-        border-radius: 0;
+    .map-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #FBFBFB;
+      border-radius: 16px 16px 0 0;
+      z-index: 201;
+      padding: 0 24px 40px;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+      max-height: 60vh;
+      overflow-y: auto;
+      /* Only shown on touch devices */
+      display: none;
+    }
+
+    .map-drawer.is-open {
+      transform: translateY(0);
+    }
+
+    /* Show drawer elements only on touch / mobile */
+    @media (hover: none) {
+      .map-drawer-overlay,
+      .map-drawer {
+        display: block;
       }
+    }
+
+    @media (hover: none) and (max-width: 1023px) {
+      .map-drawer-overlay,
+      .map-drawer {
+        display: block;
+      }
+    }
+
+    .map-drawer-handle {
+      width: 36px;
+      height: 4px;
+      background: var(--rule);
+      border-radius: 2px;
+      margin: 12px auto 20px;
+    }
+
+    .map-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .map-drawer-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0 4px 16px;
+      font-size: 22px;
+      color: var(--text-muted);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .map-drawer-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .map-drawer-title {
+      font-family: 'Isabella Sans', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.15;
+    }
+
+    .map-drawer-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.72;
+      font-weight: 300;
+      margin-top: 10px;
+    }
+
+    .map-drawer-image {
+      margin-top: 18px;
+      border-radius: 6px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid var(--rule);
+    }
+
+    .map-drawer-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
   </style>
 </head>
@@ -1049,6 +1214,12 @@
         <span class="label">Festivities</span>
         <span class="value">May 28 – May 31</span>
       </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span></span>
+      <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
   </header>
 
@@ -1086,7 +1257,7 @@
         <span class="eyebrow">The short version</span>
         <h2 class="section-title">What you need to know</h2>
         <ul class="tldr-list">
-          <li><span><strong>Book lodging now.</strong> Big Sur is already mostly booked through summer 2026, and we're
+          <li><span><strong><a href="#lodging" style="color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(168,204,58,0.6);">Book lodging now.</a></strong> Big Sur is already mostly booked through summer 2026, and we're
               14 months out. Don't wait.</span></li>
           <li><span><strong>Our room block at Big Sur Lodge is open.</strong> Book directly through the link below —
               easiest option, puts you at the center of the weekend.</span></li>
@@ -1124,12 +1295,12 @@
                   settle in, and grab dinner on your own in Big Sur or en route.</p>
               </div>
             </li>
-            <li class="event-item">
+            <li class="event-item family-only">
               <span class="event-time">5:00 – 8:00 pm</span>
               <div class="event-desc">
                 <strong>Family Welcome Dinner</strong>
                 <p>Big Sur Lodge Redwood Patio. Hosted by our loving parents, Mark, Ann, Marc, and Felicia.</p>
-                <span class="event-note">Family only.</span>
+                <span class="family-tag">Family only</span>
               </div>
             </li>
           </ul>
@@ -1191,7 +1362,14 @@
                 <strong>Dinner in Big Sur</strong>
                 <p>Dine in groups at any of the phenomenal establishments in Big Sur. We have favorites from casual to
                   fine dining and can share our recommendations.</p>
-                <span class="event-note">Friends: Sunset at Pfeiffer Beach, drinks at Fernwood Tavern.</span>
+              </div>
+            </li>
+            <li class="event-item friends-rec">
+              <span class="event-time">Late</span>
+              <div class="event-desc">
+                <strong>Sunset Afters</strong>
+                <p>Catch the sunset at Pfeiffer Beach, then wind down with drinks at Fernwood Tavern.</p>
+                <span class="friends-tag">Friends</span>
               </div>
             </li>
           </ul>
@@ -1227,11 +1405,19 @@
           our favorite memories. We hope coming out for our wedding helps you get to know us a bit better. We won't be
           with you every second, but every second will be worth it. The journey is the destination.</p>
 
-        <div class="places-scrollytelling" data-illustrated-map data-places-url="./assets/data/places.json">
-          <div class="places-sticky-map">
-            <div class="illustrated-map-stage"
-              aria-label="Illustrated map of Big Sur with interactive points of interest">
-              <svg class="illustrated-map-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1029 770">
+        <!-- Invite prompt -->
+        <p class="map-invite" id="map-invite" aria-live="polite">
+          <span class="map-invite-dot" aria-hidden="true"></span>
+          Tap the map to explore our favorite Big Sur spots
+        </p>
+
+        <div class="places-map-wrap" data-illustrated-map data-places-url="./assets/data/places.json">
+          <div class="illustrated-map-stage"
+            aria-label="Illustrated map of Big Sur with interactive points of interest">
+            <!-- Quick-Look card (desktop hover) — populated by JS -->
+            <div class="map-quicklook" id="map-quicklook" role="tooltip" aria-live="polite" aria-hidden="true"></div>
+
+            <svg class="illustrated-map-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1029 770">
                 <defs>
                   <style>
                     .cls-1 {
@@ -1257,7 +1443,7 @@
                     .cls-6 {
                       font-size: 17px;
                       fill: #fff;
-                      font-family: Helvetica, Helvetica;
+                      font-family: 'Isabella Sans', sans-serif;
                     }
 
                     .cls-7 {
@@ -1266,13 +1452,13 @@
 
                     .cls-8 {
                       fill: #fff;
-                      font-family: Helvetica-Light, Helvetica;
+                      font-family: 'Isabella Sans', sans-serif;
                       font-size: 24px;
                       font-weight: 300;
                     }
 
                     .cls-9 {
-                      font-family: Helvetica, Helvetica;
+                      font-family: 'Isabella Sans', sans-serif;
                       fill: #789904;
                       font-size: 20px;
                     }
@@ -1378,13 +1564,9 @@
                 </g>
               </svg>
             </div>
-          </div>
+          </div><!-- /.illustrated-map-stage -->
+        </div><!-- /.places-map-wrap -->
 
-          <div class="places-scroll-content">
-            <div class="places-scroll-spacer"></div>
-            <!-- Cards will be dynamically inserted here -->
-          </div>
-        </div>
 
       </div>
     </div>
@@ -1564,10 +1746,12 @@
     <p>We kept our list small because we really hope to share this weekend with just the people who mean the most to us.
       We hope you can make it. Big Sur's magic will make it all make sense once you're there. Sharing our wedding
       weekend with you is something we'll carry for the rest of our lives.</p>
-    <a href="/cdn-cgi/l/email-protection#b1c2c1d4dfd2d4c3d0dfd5dbd4dfdfd08386f1d6dcd0d8dd9fd2dedc"
-      class="btn btn-primary">Email Us</a>
-    <a href="#overview" class="btn btn-secondary"
-      style="color: rgba(251,251,251,0.7); border-color: rgba(251,251,251,0.2);">Back to Top</a>
+    <div class="cta-btn-group">
+      <a href="/cdn-cgi/l/email-protection#b1c2c1d4dfd2d4c3d0dfd5dbd4dfdfd08386f1d6dcd0d8dd9fd2dedc"
+        class="btn btn-primary">Email Us</a>
+      <a href="#overview" class="btn btn-secondary"
+        style="color: rgba(251,251,251,0.7); border-color: rgba(251,251,251,0.2);">Back to Top</a>
+    </div>
   </section>
 
   <footer>
@@ -1575,6 +1759,23 @@
   </footer>
 
   <script src="./js/illustrated-map.js" defer></script>
+
+  <!-- Mobile bottom drawer (shown on touch devices only via CSS hover:none) -->
+  <div class="map-drawer-overlay" id="map-drawer-overlay" aria-hidden="true"></div>
+  <div class="map-drawer" id="map-drawer" role="dialog" aria-modal="true" aria-label="Location details" aria-hidden="true">
+    <div class="map-drawer-handle" aria-hidden="true"></div>
+    <div class="map-drawer-header">
+      <div>
+        <span class="map-drawer-eyebrow" id="map-drawer-eyebrow"></span>
+        <h2 class="map-drawer-title" id="map-drawer-title"></h2>
+      </div>
+      <button class="map-drawer-close" id="map-drawer-close" aria-label="Close">×</button>
+    </div>
+    <p class="map-drawer-desc" id="map-drawer-desc"></p>
+    <div class="map-drawer-image" id="map-drawer-image" style="display:none">
+      <img id="map-drawer-img" src="" alt="">
+    </div>
+  </div>
 </body>
 
 </html>
