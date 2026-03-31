@@ -1214,6 +1214,31 @@
       object-fit: cover;
       display: block;
     }
+
+    .map-drawer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 18px;
+    }
+
+    .map-drawer-nav button {
+      background: var(--sand);
+      border: 1px solid var(--rule);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: 'Isabella Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .map-drawer-nav button:active {
+      background: var(--rule);
+    }
   </style>
 </head>
 
@@ -1806,6 +1831,10 @@
     <p class="map-drawer-desc" id="map-drawer-desc"></p>
     <div class="map-drawer-image" id="map-drawer-image" style="display:none">
       <img id="map-drawer-img" src="" alt="">
+    </div>
+    <div class="map-drawer-nav" id="map-drawer-nav">
+      <button id="map-drawer-prev" aria-label="Previous Location">← Prev</button>
+      <button id="map-drawer-next" aria-label="Next Location">Next →</button>
     </div>
   </div>
 </body>

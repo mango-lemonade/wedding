@@ -26,11 +26,14 @@
   const drawerDesc   = document.getElementById('map-drawer-desc');
   const drawerImgWrap = document.getElementById('map-drawer-image');
   const drawerImg    = document.getElementById('map-drawer-img');
+  const drawerPrev   = document.getElementById('map-drawer-prev');
+  const drawerNext   = document.getElementById('map-drawer-next');
 
   // ── State ─────────────────────────────────────────────────────────────────
   let places = [];
   let hasInteracted = false;
   let quicklookTimer = null;
+  let currentIndex = -1;
 
   // Detect touch / no-hover device (matches CSS `@media (hover: none)`)
   const isTouch = () => window.matchMedia('(hover: none)').matches;
@@ -90,6 +93,23 @@
   function openDrawer(place) {
     if (!drawer) return;
 
+    currentIndex = places.findIndex(p => p.id === place.id);
+
+    // Update nav buttons
+    if (drawerPrev) {
+      drawerPrev.style.opacity = currentIndex > 0 ? '1' : '0.3';
+      drawerPrev.style.pointerEvents = currentIndex > 0 ? 'auto' : 'none';
+    }
+    if (drawerNext) {
+      if (currentIndex < places.length - 1) {
+        drawerNext.textContent = 'Next →';
+      } else {
+        drawerNext.textContent = 'Done';
+      }
+      drawerNext.style.opacity = '1';
+      drawerNext.style.pointerEvents = 'auto';
+    }
+
     drawerEye.textContent   = place.eyebrow || '';
     drawerTitle.textContent = place.title   || '';
     drawerDesc.textContent  = place.desc    || '';
@@ -107,7 +127,21 @@
     drawerOverlay.style.display = 'block';
     drawer.setAttribute('aria-hidden', 'false');
     drawer.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    
+    // Scroll map to top of viewport smoothly so it isn't covered by drawer
+    const stickyNavHeight = document.querySelector('.page-nav')?.offsetHeight || 40;
+    const mapTop = root.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top: mapTop - stickyNavHeight - 16,
+      behavior: 'smooth'
+    });
+
+    // Lock body scroll after smooth scroll completes (approx 400ms)
+    setTimeout(() => {
+      if (drawer.classList.contains('is-open')) {
+        document.body.style.overflow = 'hidden';
+      }
+    }, 400);
   }
 
   function closeDrawer() {
@@ -184,6 +218,30 @@
         closeDrawer();
       }
     });
+
+    if (drawerPrev) {
+      drawerPrev.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          const p = places[currentIndex - 1];
+          clearActiveDot();
+          setActiveDot(p.id);
+          openDrawer(p);
+        }
+      });
+    }
+
+    if (drawerNext) {
+      drawerNext.addEventListener('click', () => {
+        if (currentIndex < places.length - 1) {
+          const p = places[currentIndex + 1];
+          clearActiveDot();
+          setActiveDot(p.id);
+          openDrawer(p);
+        } else {
+          closeDrawer();
+        }
+      });
+    }
   }
 
   // ── Entry point ───────────────────────────────────────────────────────────
