@@ -1112,7 +1112,8 @@
 
     /* ── MOBILE BOTTOM DRAWER ── */
     .map-drawer-overlay {
-      display: none;
+      display: none !important;
+      pointer-events: none;
       position: fixed;
       inset: 0;
       background: rgba(12, 38, 15, 0.35);
@@ -1122,10 +1123,13 @@
     }
 
     .map-drawer-overlay.is-open {
+      display: block !important;
+      pointer-events: auto;
       opacity: 1;
     }
 
     .map-drawer {
+      display: none !important;
       position: fixed;
       bottom: 0;
       left: 0;
@@ -1138,29 +1142,11 @@
       transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
       max-height: 60vh;
       overflow-y: auto;
-      /* Only shown on touch devices */
-      display: none;
     }
 
     .map-drawer.is-open {
+      display: block !important;
       transform: translateY(0);
-    }
-
-    /* Show drawer elements only on touch / mobile */
-    @media (hover: none) {
-
-      .map-drawer-overlay,
-      .map-drawer {
-        display: block;
-      }
-    }
-
-    @media (hover: none) and (max-width: 1023px) {
-
-      .map-drawer-overlay,
-      .map-drawer {
-        display: block;
-      }
     }
 
     .map-drawer-handle {
@@ -1250,7 +1236,7 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    
+
     .map-drawer-nav button:active {
       background: var(--rule);
     }
