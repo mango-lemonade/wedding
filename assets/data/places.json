@@ -48,7 +48,7 @@
       "title": "Ventana Campground",
       "desc": "The best glamping California has to offer.",
       "image": "assets/images/ventana.webp",
-      "imagePosition": "bottom"
+      "imagePosition": "center"
     },
     {
       "id": "surhouse",
