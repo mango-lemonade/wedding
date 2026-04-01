@@ -64,8 +64,12 @@
     clearTimeout(quicklookTimer);
 
     const pos = place.imagePosition || 'center';
+    const captionHtml = place.captionHtml || '';
     const imageHtml = place.image
-      ? `<div class="map-quicklook-image"><img src="${place.image}" alt="${place.title || ''}" style="object-position: ${pos}" loading="lazy"></div>`
+      ? `<div class="map-quicklook-image">
+           <img src="${place.image}" alt="${place.title || ''}" style="object-position: ${pos}" loading="lazy">
+           ${captionHtml}
+         </div>`
       : '';
 
     quicklook.innerHTML = `
@@ -114,11 +118,15 @@
     drawerTitle.textContent = place.title   || '';
     drawerDesc.textContent  = place.desc    || '';
 
+    const drawerCaption = document.getElementById('map-drawer-caption');
     if (place.image) {
       drawerImg.src = place.image;
       drawerImg.alt = place.title || '';
       drawerImg.style.objectPosition = place.imagePosition || 'center';
       drawerImgWrap.style.display = '';
+      if (drawerCaption) {
+        drawerCaption.innerHTML = place.captionHtml || '';
+      }
     } else {
       drawerImgWrap.style.display = 'none';
     }

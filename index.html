@@ -229,6 +229,8 @@
     .hero-name em {
       font-style: italic;
       color: var(--teal-light);
+      margin-left: -0.05em;
+      margin-right: 0.05em;
     }
 
     .hero-location {
@@ -479,7 +481,7 @@
 
     /* Dark callout — high contrast text */
     .callout-dark {
-      background: #485B4A;
+      background: #0C260F;
       color: #ffffff;
       padding: 16px 22px;
     }
@@ -1098,14 +1100,12 @@
 
     .map-quicklook-image {
       margin-top: 14px;
-      border-radius: 4px;
-      overflow: hidden;
-      aspect-ratio: 16 / 9;
     }
 
     .map-quicklook-image img {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 4px;
       object-fit: cover;
       display: block;
     }
@@ -1203,15 +1203,13 @@
 
     .map-drawer-image {
       margin-top: 18px;
-      border-radius: 6px;
-      overflow: hidden;
-      aspect-ratio: 16 / 9;
-      border: 1px solid var(--rule);
     }
 
     .map-drawer-image img {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
       object-fit: cover;
       display: block;
     }
@@ -1293,7 +1291,7 @@
           now. If you love us, you probably love the outdoors. There is no better place to experience the beauty of
           California. Having you here means everything to us, so we promise we'll make it worth the trip.
         </p>
-        <p class="section-intro ">
+        <p class="section-intro" style="font-size: 17.5px; line-height: 1.9;">
           Below is everything you need to start planning. The short version is at the top; all the detail follows.
         </p>
       </div>
@@ -1313,8 +1311,8 @@
               easiest option, puts you at the center of the weekend.</span></li>
           <li><span><strong>Arrive Friday, plan through Monday.</strong> The wedding is Saturday, but we have a full
               long weekend planned and would love you there for as much of it as possible.</span></li>
-          <li><span><strong>Saturday is on us.</strong> Shuttles, dinner, and drinks on the wedding day are covered.
-              Everything before and after is on you — but we'll make it worth it.</span></li>
+          <li><span><strong>Saturday is on us.</strong> Shuttles, dinner, and drinks on the wedding day are
+              covered.</span></li>
           <li><span><strong>No parking at the venue.</strong> Shuttles are provided. If you're not staying at Big Sur
               Lodge, arrival options will be more limited — details below.</span></li>
           <li><span><strong>Questions?</strong> Just email us — we're happy to help with anything.</span></li>
@@ -1370,18 +1368,17 @@
                 <p>Get ready, take a walk, explore. Big Sur will do the rest.</p>
               </div>
             </li>
-            <li class="event-item">
-              <span class="event-time">3:00 pm</span>
+            <li class="event-item callout callout-dark" style="margin: 0; align-items: start;">
+              <span class="event-time" style="color: var(--teal-light);">3:00 pm</span>
               <div class="event-desc">
                 <strong>Ceremony & Celebration</strong>
-                <p>The wedding — ceremony, dinner, dancing, and beyond — runs 3:00 pm to 10:00 pm+.</p>
-                <span class="event-note">Shuttles to and from the venue are provided. Do not drive to the venue.</span>
+                <p style="margin-top: 4px; color: #ffffff;">The wedding — ceremony, dinner, dancing, s'mores, and beyond
+                  — runs 3:00 pm to 10:00 pm+.</p>
+                <span class="event-note" style="color: rgba(255,255,255,0.8);">Shuttles to and from the venue are
+                  provided. Do not drive to the venue.</span>
               </div>
             </li>
           </ul>
-          <div class="callout callout-dark" style="margin-top: 20px;">
-            <strong>All on us Saturday:</strong> shuttles, dinner, and drinks. Come ready to celebrate.
-          </div>
         </div>
 
         <!-- Sunday -->
@@ -1629,14 +1626,18 @@
                   <tspan class="cls-11" x="0" y="0">T</tspan>
                   <tspan x="8.5" y="0">o South Big Sur</tspan>
                 </text>
+                <text class="cls-6" transform="translate(28.58 741.42)">
+                  <tspan x="0" y="0">Pacific Ocean</tspan>
+                </text>
               </g>
             </svg>
-          </div>
-        </div><!-- /.illustrated-map-stage -->
-      </div><!-- /.places-map-wrap -->
+          </div><!-- /.illustrated-map-stage -->
+          <div
+            style="text-align: right; font-size: 13px; color: var(--text-muted); margin-top: 10px; font-weight: 300;">
+            This map covers a ~40 minute drive</div>
+        </div><!-- /.places-map-wrap -->
 
-
-    </div>
+      </div>
     </div>
 
     <!-- LODGING -->
@@ -1646,10 +1647,9 @@
         <h2 class="section-title ">Lodging</h2>
 
         <div class="callout callout-warm">
-          <strong>Book as soon as you know you're coming.</strong> Big Sur is one of the most in-demand destinations on
-          the West Coast, and Memorial Day weekend fills up extremely fast. It is currently April, and Big Sur is
-          already mostly booked through the summer. The 12-month booking window for most properties opens soon — don't
-          wait.
+          <strong>Book soon!</strong> Big Sur is one of the most in-demand destinations on
+          the West Coast, and Memorial Day weekend fills up extremely fast. The booking window
+          for most properties opens soon — don't wait.
         </div>
 
         <h3 class="subsection-title">Our Room Block</h3>
@@ -1754,9 +1754,9 @@
         <h2 class="section-title ">Transportation</h2>
 
         <h3 class="subsection-title">Wedding Day Shuttles</h3>
-        <p class="section-intro" style="margin-bottom: 24px;">There is no parking at the venue. Shuttles will be
-          provided to and from the ceremony and reception — this is the plan, no exceptions, on a night with an open bar
-          on Highway 1.</p>
+        <p class="section-intro" style="margin-bottom: 24px;"> Shuttles will be
+          provided to and from the wedding. There is no parking at the venue. Highway 1 + open bar = no one drives.
+        </p>
         <div class="callout callout-warm">
           <strong>Staying outside Big Sur Lodge?</strong> You may need to make your way to the Lodge to catch the
           primary shuttle, or coordinate with us to arrange a single pickup at a specific time. Please let us know where
@@ -1841,6 +1841,7 @@
     <p class="map-drawer-desc" id="map-drawer-desc"></p>
     <div class="map-drawer-image" id="map-drawer-image" style="display:none">
       <img id="map-drawer-img" src="" alt="">
+      <div id="map-drawer-caption"></div>
     </div>
     <div class="map-drawer-nav" id="map-drawer-nav">
       <button id="map-drawer-prev" aria-label="Previous Location">← Prev</button>

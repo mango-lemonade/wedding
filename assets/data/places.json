@@ -68,7 +68,8 @@
       "title": "Nepenthe and Cafe Kevah",
       "desc": "One of the most iconic casual restaurants on the California coast.",
       "image": "assets/images/nepenthe.webp",
-      "imagePosition": "center"
+      "imagePosition": "center",
+      "captionHtml": "<div style=\"display:flex; font-size:11px; color:var(--text-muted); padding-top:6px; letter-spacing:0.04em;\"><span style=\"flex:1; text-align:center;\">Marc &amp; Felicia</span><span style=\"flex:1; text-align:center;\">Spencer &amp; Jenna</span></div>"
     },
     {
       "id": "pullout",
